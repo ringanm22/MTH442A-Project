@@ -17,7 +17,3 @@ for i in stocks:
     df = yf.download(i, start = "2010-01-01", end = "2023-10-26")
     data[i] = df
     df.to_csv(f"{i}.csv")
-
-from pipeline import pipeline
-
-x = pipeline(data[i])
