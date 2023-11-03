@@ -77,6 +77,9 @@ def pipeline(df):
     dat['Is_quarter_start'] = dat['Date'].dt.is_quarter_start
     dat['Is_year_end'] = dat['Date'].dt.is_year_end
     dat['Is_year_start'] = dat['Date'].dt.is_year_start
+
+    # Dropping Open, High and Low columns
+    dat.drop(['Open', 'High', 'Low'], axis = 1)
     
     return dat
     
