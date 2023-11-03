@@ -23,7 +23,6 @@ def pipeline(df):
     dat['Close(t-2)'] = dat.Close.shift(periods = 2)
     dat['Close(t-5)'] = dat.Close.shift(periods = 5)
     dat['Close(t-10)'] = dat.Close.shift(periods = 10)
-    dat['Open(t-1)'] = dat.Open.shift(periods = 1)
     
     #Exponential Moving Averages
     dat['EMA_5'] = df.Close.ewm(span = 5, adjust = False).mean().fillna(0)
