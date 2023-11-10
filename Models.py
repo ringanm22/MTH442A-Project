@@ -2,7 +2,7 @@
 """
 Created on Tue Nov  7 11:29:58 2023
 
-@author: ASUS
+@author: Ringan Majumdar
 """
 
 
@@ -44,7 +44,7 @@ def LR(X_train, X_test, y_train, y_test):
     y_pred = model.predict(X_test)
     
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-    return rmse
+    return rmse, y_pred
     
 ## Random Forest Regressor
 def RFR(X_train, X_test, y_train, y_test):
@@ -53,7 +53,7 @@ def RFR(X_train, X_test, y_train, y_test):
     y_pred = model.predict(X_test)
     
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-    return rmse
+    return rmse, y_pred
 
 def XGB(X_train, X_test, y_train, y_test):
     model = xgb.XGBRegressor(objective='reg:squarederror', random_state=42, booster='gbtree')
@@ -62,14 +62,23 @@ def XGB(X_train, X_test, y_train, y_test):
     y_pred = model.predict(X_test)
     
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-    return rmse
-
-   
-updated_df = data['BPCL.NS']
-df_ML = split(updated_df)
-X_train, X_test, y_train, y_test = df_ML[0], df_ML[1], df_ML[2], df_ML[3]
+    return rmse, y_pred
 
 
-LR(df_ML[0], df_ML[1], df_ML[2], df_ML[3])
-RFR(df_ML[0], df_ML[1], df_ML[2], df_ML[3])
-XGB(df_ML[0], df_ML[1], df_ML[2], df_ML[3])
+def merged_y(X_train, X_test, y_train, y_test):
+    df = {'y_test' : np.asarray(y_test).flatten(), 
+          'LR_test' : np.asarray(LR(X_train, X_test, y_train, y_test)[1].flatten()),
+          'RFR_test' : np.asarray(RFR(X_train, X_test, y_train, y_test)[1]),
+          'XGB_test' : np.asarray(XGB(X_train, X_test, y_train, y_test)[1])}
+    df = pd.DataFrame(df)
+    df = df.set_index(y_test.index)
+    return df
+
+stocks = ["COROMANDEL.NS", "CIPLA.NS", "TCS.NS", "HDFCBANK.NS", "BPCL.NS"]
+for i in stocks:
+    X_train, X_test, y_train, y_test = split(data[i])
+    foo = merged_y(X_train, X_test, y_train, y_test)
+    
+    foo.to_csv(f'{i}_pred_LR_RFR_XGB.csv')
+    
+    
