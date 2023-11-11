@@ -3,7 +3,7 @@ library(forecast)
 library(ggplot2)
 #-------------1)BPCL.NS Data-------------------------------------------------
 
-  
+
 
 data = read.csv('BPCL.NS_updated.csv')
 #dividing into train and test
@@ -28,20 +28,24 @@ arimax_model <- arima(train_data$Close, order = c(0, 1, 0), xreg = train_data[, 
 test_covariates <- test_data[, selected_covariate_columns]
 arimax_model$xreg  = test_covariates
 # Make the forecast explicitly providing exogenous variables
-y.fit <- forecast(arimax_model, xreg = as.matrix(test_covariates))$mean
+y.fit <- forecast(arimax_model)$mean
 head(y.fit)
 
 #plots
 ggplot() +
   geom_vline(xintercept = div, linetype = 'dashed', col = 'navyblue', size = 0.6) +
   geom_line(data = data, aes(x = 1 : nrow(data), y = Close, col = 'Original')) +
-  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'fitted'), size = 0.75) +
+  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'Fitted'), size = 0.75) +
   labs(x = 'Date',
        y = 'Closing Price',
        color = 'Index') +
-  scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
-  theme(axis.text.x = element_text(angle = 10)) +
-  theme(plot.title = element_text(hjust = 0)) 
+  scale_x_continuous(breaks = seq(1,nrow(data),800), labels = data$Date[seq(1,nrow(data),800)])+
+  theme(axis.text.x = element_text( size = 14),
+        axis.text.y = element_text( size = 14),
+        axis.title = element_text(size = 15),
+        legend.text = element_text( size = 12),
+        legend.title = element_text( size = 15, hjust = 0.5))
+
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
@@ -81,13 +85,16 @@ head(y.fit)
 ggplot() +
   geom_vline(xintercept = div, linetype = 'dashed', col = 'navyblue', size = 0.6) +
   geom_line(data = data, aes(x = 1 : nrow(data), y = Close, col = 'Original')) +
-  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'fitted'), size = 0.75) +
+  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'Fitted'), size = 0.75) +
   labs(x = 'Date',
        y = 'Closing Price',
        color = 'Index') +
-  scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
-  theme(axis.text.x = element_text(angle = 10)) +
-  theme(plot.title = element_text(hjust = 0))  
+  scale_x_continuous(breaks = seq(1,nrow(data),800), labels = data$Date[seq(1,nrow(data),800)])+
+  theme(axis.text.x = element_text( size = 14),
+        axis.text.y = element_text( size = 14),
+        axis.title = element_text(size = 15),
+        legend.text = element_text( size = 12),
+        legend.title = element_text( size = 15, hjust = 0.5))
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
@@ -127,13 +134,16 @@ head(y.fit)
 ggplot() +
   geom_vline(xintercept = div, linetype = 'dashed', col = 'navyblue', size = 0.6) +
   geom_line(data = data, aes(x = 1 : nrow(data), y = Close, col = 'Original')) +
-  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'fitted'), size = 0.75) +
+  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'Fitted'), size = 0.75) +
   labs(x = 'Date',
        y = 'Closing Price',
        color = 'Index') +
-  scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
-  theme(axis.text.x = element_text(angle = 10)) +
-  theme(plot.title = element_text(hjust = 0))  
+  scale_x_continuous(breaks = seq(1,nrow(data),800), labels = data$Date[seq(1,nrow(data),800)])+
+  theme(axis.text.x = element_text( size = 14),
+        axis.text.y = element_text( size = 14),
+        axis.title = element_text(size = 15),
+        legend.text = element_text( size = 12),
+        legend.title = element_text( size = 15, hjust = 0.5))
 
 #RMSE
 library(Metrics)
@@ -173,14 +183,16 @@ head(y.fit)
 ggplot() +
   geom_vline(xintercept = div, linetype = 'dashed', col = 'navyblue', size = 0.6) +
   geom_line(data = data, aes(x = 1 : nrow(data), y = Close, col = 'Original')) +
-  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'fitted'), size = 0.75) +
+  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'Fitted'), size = 0.75) +
   labs(x = 'Date',
        y = 'Closing Price',
        color = 'Index') +
-  scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
-  theme(axis.text.x = element_text(angle = 10)) +
-  theme(plot.title = element_text(hjust = 0)) 
-
+  scale_x_continuous(breaks = seq(1,nrow(data),800), labels = data$Date[seq(1,nrow(data),800)])+
+  theme(axis.text.x = element_text( size = 14),
+        axis.text.y = element_text( size = 14),
+        axis.title = element_text(size = 15),
+        legend.text = element_text( size = 12),
+        legend.title = element_text( size = 15, hjust = 0.5))
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
@@ -220,17 +232,26 @@ head(y.fit)
 ggplot() +
   geom_vline(xintercept = div, linetype = 'dashed', col = 'navyblue', size = 0.6) +
   geom_line(data = data, aes(x = 1 : nrow(data), y = Close, col = 'Original')) +
-  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'fitted'), size = 0.75) +
+  geom_line(data = test_data, aes(x = (div+1):nrow(data), y = y.fit, col = 'Fitted'), size = 0.75) +
   labs(x = 'Date',
        y = 'Closing Price',
        color = 'Index') +
-  scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
-  theme(axis.text.x = element_text(angle = 10)) +
-  theme(plot.title = element_text(hjust = 0)) 
-
+  scale_x_continuous(breaks = seq(1,nrow(data),800), labels = data$Date[seq(1,nrow(data),800)])+
+  theme(axis.text.x = element_text( size = 14),
+        axis.text.y = element_text( size = 14),
+        axis.title = element_text(size = 15),
+        legend.text = element_text( size = 12),
+        legend.title = element_text( size = 15, hjust = 0.5))
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
 
 
+
+
+  
+  
+  
+  
+  
   
