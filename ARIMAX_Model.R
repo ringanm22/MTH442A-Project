@@ -41,8 +41,7 @@ ggplot() +
        color = 'Index') +
   scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
   theme(axis.text.x = element_text(angle = 10)) +
-  ggtitle("ARIMAX Model Fitted vs. Original Closing Prices")
-
+  theme(plot.title = element_text(hjust = 0))  # This removes the title
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
@@ -88,8 +87,7 @@ ggplot() +
        color = 'Index') +
   scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
   theme(axis.text.x = element_text(angle = 10)) +
-  ggtitle("ARIMAX Model Fitted vs. Original Closing Prices")
-
+  theme(plot.title = element_text(hjust = 0))  # This removes the title
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
@@ -135,7 +133,7 @@ ggplot() +
        color = 'Index') +
   scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
   theme(axis.text.x = element_text(angle = 10)) +
-  ggtitle("ARIMAX Model Fitted vs. Original Closing Prices")
+  theme(plot.title = element_text(hjust = 0))  # This removes the title
 
 #RMSE
 library(Metrics)
@@ -181,7 +179,7 @@ ggplot() +
        color = 'Index') +
   scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
   theme(axis.text.x = element_text(angle = 10)) +
-  ggtitle("ARIMAX Model Fitted vs. Original Closing Prices")
+  theme(plot.title = element_text(hjust = 0))  # This removes the title
 
 #RMSE
 library(Metrics)
@@ -228,18 +226,11 @@ ggplot() +
        color = 'Index') +
   scale_x_continuous(breaks = seq(1, nrow(data), 500), labels = data$Date[seq(1, nrow(data), 500)]) +
   theme(axis.text.x = element_text(angle = 10)) +
-  ggtitle("ARIMAX Model Fitted vs. Original Closing Prices")
+  theme(plot.title = element_text(hjust = 0))  # This removes the title
 
 #RMSE
 library(Metrics)
 rmse(test_data$Close, y.fit)
 
 
-  
-
-  
-  
-  
-  
-  
   
