@@ -73,7 +73,7 @@ selected_covariate_columns <- which(names(data) %in% selected_covariate_names)
 
 
 # Fit an ARIMAX model with exogenous variables
-arimax_model <- arima(train_data$Open, order = c(0, 1, 0), xreg = train_data[, selected_covariate_columns])
+arimax_model <- arima(train_data$Open, order = c(0, 1, 1), xreg = train_data[, selected_covariate_columns])
 # Extract exogenous variables from the test data
 test_covariates <- test_data[, selected_covariate_columns]
 arimax_model$xreg  = test_covariates
@@ -172,7 +172,7 @@ selected_covariate_columns <- which(names(data) %in% selected_covariate_names)
 
 
 # Fit an ARIMAX model with exogenous variables
-arimax_model <- arima(train_data$Open, order = c(0, 1, 0), xreg = train_data[, selected_covariate_columns])
+arimax_model <- arima(train_data$Open, order = c(1, 1, 1), xreg = train_data[, selected_covariate_columns])
 test_covariates <- test_data[, selected_covariate_columns]
 arimax_model$xreg  = test_covariates
 # Make the forecast explicitly providing exogenous variables
